@@ -1,0 +1,21 @@
+{
+  "name": "template",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "dandgerson"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dandgerson/template",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6"
+  }
+}

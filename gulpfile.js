@@ -16,7 +16,7 @@
 
 gulp.task('sass', function(){
 	return gulp.src(['app/sass/**/*.sass', 'app/sass/**/*.scss'])
-	.pipe(sass({outputStyle: 'expanded',includePaths: require('node-bourbon').includePaths}).on('error', sass.logError))
+	.pipe(sass().on('error', sass.logError))
 	.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true }))
 	.pipe(gulp.dest('app/css'))
 	.pipe(browserSync.reload({stream: true}))

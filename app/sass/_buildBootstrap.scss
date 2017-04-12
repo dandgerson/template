@@ -1,0 +1,86 @@
+// 1 - Load project variables.
+// 2 - Load bootstrap sass files.
+// 3 - Load custom app sass files.
+
+// --------------------------------------------------------
+//  Import in the default bootstrap variables.
+//  Then override bootstrap default with project specific values.
+// --------------------------------------------------------
+@import "app/bower/bootstrap/scss/variables";
+@import "buildBootstrap/customVariables";
+
+@import "buildBootstrap/functions";
+
+// --------------------------------------------------------
+// Import required bootstrap sass files needed for this project.
+// Uncomment any bootstrap functionality required for this project.
+// The idea is to keep this as small as possible.
+// --------------------------------------------------------
+
+/* --------------------------------------------------------
+   Core mixins
+   -------------------------------------------------------- */
+
+@import "app/bower/bootstrap/scss/mixins";
+
+/* --------------------------------------------------------
+   Reset and dependencies
+   -------------------------------------------------------- */
+
+// @import "app/bower/bootstrap/scss/normalize";
+// @import "app/bower/bootstrap/scss/print";
+
+/* --------------------------------------------------------
+   Core CSS
+   -------------------------------------------------------- */
+
+//@import "app/bower/bootstrap/scss/reboot";
+//@import "app/bower/bootstrap/scss/type";
+//@import "app/bower/bootstrap/scss/images";
+//@import "app/bower/bootstrap/scss/code";
+//@import "app/bower/bootstrap/scss/grid";
+//@import "app/bower/bootstrap/scss/tables";
+//@import "app/bower/bootstrap/scss/forms";
+//@import "app/bower/bootstrap/scss/buttons";
+
+/* --------------------------------------------------------
+   Components
+   -------------------------------------------------------- */
+
+//@import "app/bower/bootstrap/scss/dropdown";
+//@import "app/bower/bootstrap/scss/button-group";
+//@import "app/bower/bootstrap/scss/input-group";
+//@import "app/bower/bootstrap/scss/custom-forms";
+//@import "app/bower/bootstrap/scss/nav";
+//@import "app/bower/bootstrap/scss/navbar";
+//@import "app/bower/bootstrap/scss/card";
+//@import "app/bower/bootstrap/scss/breadcrumb";
+//@import "app/bower/bootstrap/scss/pagination";
+//@import "app/bower/bootstrap/scss/jumbotron";
+//@import "app/bower/bootstrap/scss/alert";
+//@import "app/bower/bootstrap/scss/progress";
+//@import "app/bower/bootstrap/scss/media";
+//@import "app/bower/bootstrap/scss/list-group";
+//@import "app/bower/bootstrap/scss/responsive-embed";
+//@import "app/bower/bootstrap/scss/close";
+
+/* --------------------------------------------------------
+   Components w/ JavaScript
+   -------------------------------------------------------- */
+
+//@import "app/bower/bootstrap/scss/modal";
+//@import "app/bower/bootstrap/scss/tooltip";
+//@import "app/bower/bootstrap/scss/popover";
+//@import "app/bower/bootstrap/scss/carousel";
+
+/* --------------------------------------------------------
+   Utility classes
+   -------------------------------------------------------- */
+
+//@import "app/bower/bootstrap/scss/utilities";
+
+/* --------------------------------------------------------
+   Custom application specific styles
+   -------------------------------------------------------- */
+   
+@import "buildBootstrap/base";
