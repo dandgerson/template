@@ -18,21 +18,21 @@
 // --------------------------------------------------------
 
 /* --------------------------------------------------------
-   Core mixins
-   -------------------------------------------------------- */
+	Core mixins
+	-------------------------------------------------------- */
 
 @import "app/bower/bootstrap/scss/mixins";
 
 /* --------------------------------------------------------
-   Reset and dependencies
-   -------------------------------------------------------- */
+	Reset and dependencies
+	-------------------------------------------------------- */
 
 // @import "app/bower/bootstrap/scss/normalize";
 // @import "app/bower/bootstrap/scss/print";
 
 /* --------------------------------------------------------
-   Core CSS
-   -------------------------------------------------------- */
+	Core CSS
+	-------------------------------------------------------- */
 
 //@import "app/bower/bootstrap/scss/reboot";
 //@import "app/bower/bootstrap/scss/type";
@@ -44,8 +44,8 @@
 //@import "app/bower/bootstrap/scss/buttons";
 
 /* --------------------------------------------------------
-   Components
-   -------------------------------------------------------- */
+	Components
+	-------------------------------------------------------- */
 
 //@import "app/bower/bootstrap/scss/dropdown";
 //@import "app/bower/bootstrap/scss/button-group";
@@ -65,8 +65,8 @@
 //@import "app/bower/bootstrap/scss/close";
 
 /* --------------------------------------------------------
-   Components w/ JavaScript
-   -------------------------------------------------------- */
+	Components w/ JavaScript
+	-------------------------------------------------------- */
 
 //@import "app/bower/bootstrap/scss/modal";
 //@import "app/bower/bootstrap/scss/tooltip";
@@ -74,13 +74,13 @@
 //@import "app/bower/bootstrap/scss/carousel";
 
 /* --------------------------------------------------------
-   Utility classes
-   -------------------------------------------------------- */
+	Utility classes
+	-------------------------------------------------------- */
 
 //@import "app/bower/bootstrap/scss/utilities";
 
 /* --------------------------------------------------------
-   Custom application specific styles
-   -------------------------------------------------------- */
-   
+	Custom application specific styles
+	-------------------------------------------------------- */
+	
 @import "buildBootstrap/base";
