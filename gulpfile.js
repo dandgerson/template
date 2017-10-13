@@ -11,7 +11,11 @@ var del = require('del'); // delete the dir
 var notify = require("gulp-notify"); // notify on errors with Sass compiler v1
 var autoprefixer = require('gulp-autoprefixer'); // prefixes automatization
 var runSequence = require('run-sequence'); // sequence build task
-
+var pug = require('gulp-pug');
+var data = require('gulp-data');
+var rename = require('gulp-rename');
+var plumber = require('gulp-plumber');
+var plumberNotifier = require('gulp-plumber-notifier');
 
 // Development Tasks
 // -----------------
@@ -46,7 +50,18 @@ gulp.task('sass', function() {
   .pipe(browserSync.reload({ // Reloading with Browser Sync
     stream: true
   }));
-})
+});
+
+gulp.task('pug', function(){
+  return gulp.src('app/pug/**/*.pug')
+  .pipe(plumber())
+  .pipe(plumberNotifier())
+  .pipe(pug({pretty: true}))
+  .pipe(gulp.dest('app'))
+  .pipe(browserSync.reload({ // Reloading with Browser Sync
+    stream: true
+  }));
+});
 
 // Watchers v1 using without defaul task
 // gulp.task('watch', ['browserSync', 'sass'], function() {
@@ -56,9 +71,18 @@ gulp.task('sass', function() {
 //   gulp.watch('app/js/**/*.js', browserSync.reload); // Reloads the browser whenever JS file change
 // });
 
-// Watchers v2
+// Watchers v2 with default task
+// gulp.task('watch', function() {
+//   gulp.watch('app/scss/**/*.+(scss|sass)', ['sass']); // run 'sass' before we start watching
+//   // Other watchers
+//   gulp.watch('app/**/*.html', browserSync.reload); // Reloads the browser whenever HTML file change
+//   gulp.watch('app/js/**/*.js', browserSync.reload); // Reloads the browser whenever JS file change
+// });
+
+// Watchers v3 with pug
 gulp.task('watch', function() {
   gulp.watch('app/scss/**/*.+(scss|sass)', ['sass']); // run 'sass' before we start watching
+  gulp.watch('app/pug/**/*.pug', ['pug']);
   // Other watchers
   gulp.watch('app/**/*.html', browserSync.reload); // Reloads the browser whenever HTML file change
   gulp.watch('app/js/**/*.js', browserSync.reload); // Reloads the browser whenever JS file change
@@ -91,6 +115,16 @@ gulp.task('fonts', function() {
   .pipe(gulp.dest('dist/fonts')) // Just copying
 });
 
+gulp.task('css', function() {
+  return gulp.src(['app/css/!(libraries.css|main.css)'])
+  .pipe(gulp.dest('dist/css')) // Just copying
+});
+
+gulp.task('js', function() {
+  return gulp.src(['app/js/**/*.js'])
+  .pipe(gulp.dest('dist/js')) // Just copying
+});
+
 // Clean dist all
 gulp.task('clean:dist', function() {
   return del.sync('dist');
@@ -109,22 +143,33 @@ gulp.task('clean:cache', function (callback) {
 // Build Sequences
 // ---------------
 
-// Watch when using wathers v2
+// Watch when using watchers v3
 gulp.task('default', function(callback) {
-  runSequence(['sass', 'browserSync'], 'watch',
+  runSequence(['sass', 'pug', 'browserSync'], 'watch',
+    callback
+    )
+});
+
+// Build with pug
+gulp.task('build', function(callback) {
+  runSequence(
+  'clean:dist', // clean:dist first
+  'pug',
+  'sass',
+    ['useref', 'images', 'fonts', 'css', 'js'], // then all others
     callback
     )
 });
 
 // Build
-gulp.task('build', function(callback) {
-  runSequence(
-  'clean:dist', // clean:dist first
-  'sass',
-    ['useref', 'images', 'fonts'], // then all others
-    callback
-    )
-});
+// gulp.task('build', function(callback) {
+//   runSequence(
+//   'clean:dist', // clean:dist first
+//   'sass',
+//     ['useref', 'images', 'fonts', 'css', 'js'], // then all others
+//     callback
+//     )
+// });
 
 // for fun
 gulp.task('hello', function() {

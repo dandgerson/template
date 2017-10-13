@@ -1,7 +1,7 @@
 /* main.scss*/
-@import "variables"; // always first
-@import "settings";
+@import "variables"; // always first for bootstrap customization
+@import "settings"; // global settings styles
 
-@import "base";
+@import "base"; // basic styles
 
-@import "media"; // always last
+@import "media"; // always last for responsive web design

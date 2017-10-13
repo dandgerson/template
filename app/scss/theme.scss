@@ -1,3 +1,8 @@
 /* theme.scss*/
-@import "variables";
+@import "variables"; // bootstrap customization
 
+// put here theme styles there
+
+body {
+  background-color: $purple;
+}
