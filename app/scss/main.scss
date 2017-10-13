@@ -1,3 +1,7 @@
 /* main.scss*/
-@import "bootstrap";
-@import "media";
+@import "variables"; // always first
+@import "settings";
+
+@import "base";
+
+@import "media"; // always last
