@@ -8,12 +8,12 @@ var cssnano = require('gulp-cssnano'); // minify css
 var imagemin = require('gulp-imagemin'); // images optimization
 var cache = require('gulp-cache'); // optimization of image optimization
 var del = require('del'); // delete the dir
-var notify = require("gulp-notify"); // notify on errors with Sass compiler v1
+// var notify = require("gulp-notify"); // notify on errors with Sass compiler v1
 var autoprefixer = require('gulp-autoprefixer'); // prefixes automatization
 var runSequence = require('run-sequence'); // sequence build task
 var pug = require('gulp-pug');
-var data = require('gulp-data');
-var rename = require('gulp-rename');
+// var data = require('gulp-data');
+// var rename = require('gulp-rename');
 var plumber = require('gulp-plumber');
 var plumberNotifier = require('gulp-plumber-notifier');
 
@@ -30,18 +30,7 @@ gulp.task('browserSync', function() {
   });
 });
 
-// Sass compiler v1 with gulp-notify
-// gulp.task('sass', function () {
-//   return gulp.src('app/scss/**/*.+(scss|sass)') // Get source files with gulp.src and will match any file ending with .scss or .sass in scss dir and all child dirs
-//   .pipe(sass({outputStyle: 'expanded'}).on("error", notify.onError())) // Using gulp-sass with gulp-notify. gulp-sass doesn't stop if you do a typo
-//   .pipe(autoprefixer(['last 15 versions'])) // Using gulp-autoprefixer
-//   .pipe(gulp.dest('app/css')) // Outputs the file in the destination folder
-//   .pipe(browserSync.reload({
-//     stream: true
-//   }))
-// });
-
-// Sass compiler v2 without gulp-notify
+// Sass compiler
 gulp.task('sass', function() {
   return gulp.src('app/scss/**/*.+(scss|sass)') // Gets all files ending with .scss in app/scss and children dirs
   .pipe(sass().on('error', sass.logError)) // Passes it through a gulp-sass, log errors to console
@@ -52,10 +41,11 @@ gulp.task('sass', function() {
   }));
 });
 
+// Pug compiler
 gulp.task('pug', function(){
   return gulp.src('app/pug/**/*.pug')
-  .pipe(plumber())
-  .pipe(plumberNotifier())
+  .pipe(plumber()) // console.log on error
+  .pipe(plumberNotifier()) // beaty notify
   .pipe(pug({pretty: true}))
   .pipe(gulp.dest('app'))
   .pipe(browserSync.reload({ // Reloading with Browser Sync
@@ -63,26 +53,10 @@ gulp.task('pug', function(){
   }));
 });
 
-// Watchers v1 using without defaul task
-// gulp.task('watch', ['browserSync', 'sass'], function() {
-//   gulp.watch('app/scss/**/*.+(scss|sass)', ['sass']); // run 'sass' before we start watching
-//   // Other watchers
-//   gulp.watch('app/**/*.html', browserSync.reload); // Reloads the browser whenever HTML file change
-//   gulp.watch('app/js/**/*.js', browserSync.reload); // Reloads the browser whenever JS file change
-// });
-
-// Watchers v2 with default task
-// gulp.task('watch', function() {
-//   gulp.watch('app/scss/**/*.+(scss|sass)', ['sass']); // run 'sass' before we start watching
-//   // Other watchers
-//   gulp.watch('app/**/*.html', browserSync.reload); // Reloads the browser whenever HTML file change
-//   gulp.watch('app/js/**/*.js', browserSync.reload); // Reloads the browser whenever JS file change
-// });
-
 // Watchers v3 with pug
 gulp.task('watch', function() {
-  gulp.watch('app/scss/**/*.+(scss|sass)', ['sass']); // run 'sass' before we start watching
-  gulp.watch('app/pug/**/*.pug', ['pug']);
+  gulp.watch('app/scss/**/*.+(scss|sass)', ['sass']); // run 'sass' before watcher
+  gulp.watch('app/pug/**/*.pug', ['pug']); // run 'pug' before watcher
   // Other watchers
   gulp.watch('app/**/*.html', browserSync.reload); // Reloads the browser whenever HTML file change
   gulp.watch('app/js/**/*.js', browserSync.reload); // Reloads the browser whenever JS file change
@@ -115,11 +89,13 @@ gulp.task('fonts', function() {
   .pipe(gulp.dest('dist/fonts')) // Just copying
 });
 
+// Copying CSS
 gulp.task('css', function() {
   return gulp.src(['app/css/!(libraries.css|main.css)'])
   .pipe(gulp.dest('dist/css')) // Just copying
 });
 
+// Copying js
 gulp.task('js', function() {
   return gulp.src(['app/js/**/*.js'])
   .pipe(gulp.dest('dist/js')) // Just copying
@@ -150,7 +126,7 @@ gulp.task('default', function(callback) {
     )
 });
 
-// Build with pug
+// Build
 gulp.task('build', function(callback) {
   runSequence(
   'clean:dist', // clean:dist first
@@ -160,16 +136,6 @@ gulp.task('build', function(callback) {
     callback
     )
 });
-
-// Build
-// gulp.task('build', function(callback) {
-//   runSequence(
-//   'clean:dist', // clean:dist first
-//   'sass',
-//     ['useref', 'images', 'fonts', 'css', 'js'], // then all others
-//     callback
-//     )
-// });
 
 // for fun
 gulp.task('hello', function() {
