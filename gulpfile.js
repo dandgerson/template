@@ -5,7 +5,7 @@ var useref = require('gulp-useref'); // concatenate
 var uglify = require('gulp-uglify'); // minify js
 var gulpIf = require('gulp-if'); // correct minify
 var cssnano = require('gulp-cssnano'); // minify css
-var imagemin = require('gulp-imagemin'); // images optimization
+var imagemin = require('gulp-imagemin'); // img optimization
 var cache = require('gulp-cache'); // optimization of image optimization
 var del = require('del'); // delete the dir
 // var notify = require("gulp-notify"); // notify on errors
@@ -74,13 +74,13 @@ gulp.task('useref', function() {
   .pipe(gulp.dest('dist'))
 });
 
-// Optimizing Images
-gulp.task('images', function() {
-  return gulp.src('app/images/**/*.+(png|jpg|gif|svg)')
+// Optimizing img
+gulp.task('img', function() {
+  return gulp.src('app/img/**/*.+(png|jpg|gif|svg)')
   .pipe(cache(imagemin({ // run imagemin with cache
     interlaced: true // Setting interlaced to true
   })))
-  .pipe(gulp.dest('dist/images'))
+  .pipe(gulp.dest('dist/img'))
 });
 
 // Copying fonts
@@ -106,9 +106,9 @@ gulp.task('clean:dist', function() {
   return del.sync('dist');
 });
 
-// Clean dist except images
-gulp.task('clean:dist:images', function() {
-  return del.sync(['dist/**/*', '!dist/images', '!dist/images/**/*']);
+// Clean dist except img
+gulp.task('clean:dist:img', function() {
+  return del.sync(['dist/**/*', '!dist/img', '!dist/img/**/*']);
 });
 
 // Clean cache
@@ -132,7 +132,7 @@ gulp.task('build', function(callback) {
   'clean:dist', // clean:dist first
   'pug',
   'sass',
-    ['useref', 'images', 'fonts', 'css', 'js'], // then all others
+    ['useref', 'img', 'fonts', 'css', 'js'], // then all others
     callback
     )
 });

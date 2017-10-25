@@ -1,7 +1,9 @@
 /* main.scss*/
-@import "variables"; // always first for bootstrap customization
+@import "variables"; // always first for bootstrap customization, includes "_functions.scss"
 
 @import "mixins"; // custom project's mixins
+
+@import "reboot"; // from bootstrap
 
 @import "type"; // font stack and typography settings
 
