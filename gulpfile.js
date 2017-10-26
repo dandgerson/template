@@ -43,7 +43,7 @@ gulp.task('sass', function() {
 
 // Pug compiler
 gulp.task('pug', function(){
-  return gulp.src('app/pug/**/*.pug')
+  return gulp.src(['app/pug/*', '!app/pug/includes/', '!app/pug/includes/*'])
   .pipe(plumber()) // console.log on error
   .pipe(plumberNotifier()) // beaty notify
   .pipe(pug({pretty: true}))
