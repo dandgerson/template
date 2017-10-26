@@ -137,7 +137,18 @@ gulp.task('build', function(callback) {
     )
 });
 
-// for fun
+// Build except img
+gulp.task('build:img', function(callback) {
+  runSequence(
+  'clean:dist:img', // clean:dist first
+  'pug',
+  'sass',
+    ['useref', 'img', 'fonts', 'css', 'js'], // then all others
+    callback
+    )
+});
+
+// test syntax
 gulp.task('hello', function() {
   console.log('Hello Dan!')
 });
